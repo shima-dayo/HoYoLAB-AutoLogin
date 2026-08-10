@@ -130,7 +130,7 @@ def main():
     cookie      = build_cookie()
     webhook_url = os.environ.get("DISCORD_WEBHOOK_URL", "").strip()
 
-    # チェックイン済み確認
+    # チェックイン済みか確認
     info_res = get_sign_info(cookie)
     if info_res.get("retcode") == 0:
         info = info_res["data"]
@@ -142,7 +142,7 @@ def main():
             send_discord(webhook_url, True, msg)
             return
 
-    # チェックイン実行
+    # チェックイン
     result  = sign(cookie)
     retcode = result.get("retcode", -1)
     message = result.get("message", "不明なエラー")
