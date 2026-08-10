@@ -1,4 +1,4 @@
-name: HoYoLab 原神 毎日チェックイン
+name: HoYoLAB 自動チェックイン
 
 on:
   schedule:
