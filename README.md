@@ -16,8 +16,6 @@ HoYoLABに自動チェックインするスクリプト。結果をDiscordに送
 > Fork後、リポジトリを必ず **Private** にしてください  
 > Settings → Danger Zone → Change visibility → Make private
 
-
-
 ### 2. Cookieを取得
 
 1. [HoYoLab](https://www.hoyolab.com/) にログイン
