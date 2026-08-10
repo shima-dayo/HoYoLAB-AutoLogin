@@ -3,7 +3,7 @@
 HoYoLABに自動チェックインするスクリプト。結果をDiscordに送信します(任意)。
 > 利用規約を確認し自己責任で使用してください。
 
----
+
 
 ## 設定手順
 
@@ -16,7 +16,7 @@ HoYoLABに自動チェックインするスクリプト。結果をDiscordに送
 > Fork後、リポジトリを必ず **Private** にしてください  
 > Settings → Danger Zone → Change visibility → Make private
 
----
+
 
 ### 2. Cookieを取得
 
@@ -30,7 +30,7 @@ HoYoLABに自動チェックインするスクリプト。結果をDiscordに送
    | `ltuid_v2` | Value の数字列 |
    | `ltoken_v2` | Value の文字列 |
 
----
+
 
 ### 3. CookieをGithubに設定
 
@@ -43,7 +43,7 @@ HoYoLABに自動チェックインするスクリプト。結果をDiscordに送
    | `LTUID` | `ltuid_v2` の数字列 |
    | `LTOKEN` | `ltoken_v2` の文字列 |
 
----
+
 
 ### 4. Discordに結果を送信 (任意)
 
@@ -61,7 +61,7 @@ HoYoLABに自動チェックインするスクリプト。結果をDiscordに送
 |------|--------|
 | `DISCORD_WEBHOOK_URL` | コピーしたWebhook URL |
 
----
+
 
 ### 5. 動作確認
 
@@ -69,7 +69,7 @@ HoYoLABに自動チェックインするスクリプト。結果をDiscordに送
 2. **「Run workflow」→「Run workflow」** をクリック
 3. Discordに通知が送信されたら成功
 
----
+
 
 ## **Q. Actionsタブに何も表示されない**  
 A. 初回Forkの場合、ActionsタブでWorkflowの有効化を求められることがあります。**「I understand my workflows, go ahead and enable them」** をクリックしてください。
