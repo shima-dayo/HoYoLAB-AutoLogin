@@ -66,5 +66,5 @@ HoYoLABに自動チェックインするスクリプト。結果をDiscordに通
 
 ---
 
-**Q. Actionsタブに何も表示されない**  
+## **Q. Actionsタブに何も表示されない**  
 A. 初回Forkの場合、ActionsタブでWorkflowの有効化を求められることがあります。**「I understand my workflows, go ahead and enable them」** をクリックしてください。
