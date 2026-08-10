@@ -94,13 +94,13 @@ def send_discord(webhook_url: str, success: bool, message: str, reward: dict | N
 
     if success:
         color = 0x57F287  # 緑
-        title = "✅ チェックインに成功したよ！"
+        title = "✅ 認証成功"
         desc  = message
         if reward:
             desc += f"\n\n **本日の報酬**: {reward['name']} × {reward['cnt']}"
     else:
         color = 0xED4245  # 赤
-        title = "❌ チェックインに失敗したよ。"
+        title = "❌ 認証失敗"
         desc  = message
 
     payload = {
