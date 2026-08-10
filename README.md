@@ -25,6 +25,8 @@ HoYoLABに自動チェックインするスクリプト。結果をDiscordに送
 3. **「Application」** タブ → **「Cookies」→「https://www.hoyolab.com」**
 4. 以下の2つをメモする
 
+   | Name | Value |
+   |------|-------------------|
    | `ltuid_v2` | Value の数字列 |
    | `ltoken_v2` | Value の文字列 |
 
