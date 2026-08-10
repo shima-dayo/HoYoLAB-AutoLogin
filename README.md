@@ -1,6 +1,6 @@
 # HoYoLAB-AutoLogin
 
-HoYoLABに自動チェックインするスクリプト。結果をDiscordに通知します（通知は任意）。
+HoYoLABに自動チェックインするスクリプト。結果をDiscordに送信します (任意)。
 > このスクリプトはHoYoLAB APIを使用しています。利用規約を確認し自己責任で使用してください。
 
 ---
