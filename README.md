@@ -9,11 +9,11 @@ HoYoLABに自動チェックインするスクリプト。結果をDiscordに通
 
 ### 1. リポジトリをForkする
 
-1. このページ右上の **「Fork」** ボタンをクリック
+1. ページ右上の **「Fork」** ボタンをクリック
 2. **「Create fork」** をクリック
 3. 自分のアカウントにForkされます
 
-> Fork後、必ずリポジトリを **Private** にしてください  
+> Fork後、リポジトリを必ず **Private** にしてください  
 > Settings → Danger Zone → Change visibility → Make private
 
 ---
@@ -23,20 +23,22 @@ HoYoLABに自動チェックインするスクリプト。結果をDiscordに通
 1. [HoYoLab](https://www.hoyolab.com/) にログイン
 2. キーボードの **F12** キーを押す
 3. **「Application」** タブ → **「Cookies」→「https://www.hoyolab.com」**
-4. `ltuid_v2` の Value、`ltoken_v2` の Valueをメモする
+4. 以下の2つをメモする
+   | `ltuid_v2` | Value の数字列 |
+   | `ltoken_v2` | Value の文字列 |
 
 ---
 
-### 3. CookieをGitHubに設定
+### 3. CookieをGithubに設定
 
 1. Forkしたリポジトリの **「Settings」** タブ
 2. **「Secrets and variables」→「Actions」**
 3. **「New repository secret」** で、
 
-   | Name | Secret（Value欄の値）|
+   | Name | Secret |
    |------|-------------------|
-   | `LTUID` | `ltuid_v2` の数字 |
-   | `LTOKEN` | `ltoken_v2` の長い文字列 |
+   | `LTUID` | `ltuid_v2` の数字列 |
+   | `LTOKEN` | `ltoken_v2` の文字列 |
 
 ---
 
@@ -50,7 +52,7 @@ HoYoLABに自動チェックインするスクリプト。結果をDiscordに通
 
 #### GitHubへの登録
 
-ステップ3と同じ手順で、以下のSecretを追加登録：
+ステップ3と同じ方法で登録：
 
 | Name | Secret |
 |------|--------|
@@ -58,11 +60,11 @@ HoYoLABに自動チェックインするスクリプト。結果をDiscordに通
 
 ---
 
-### 5. 動作確認をする
+### 5. 動作確認
 
-1. **「Actions」** タブ → **「HoYoLab 原神 毎日チェックイン」**
+1. **「Actions」** タブ → **「HoYoLAB 自動チェックイン」**
 2. **「Run workflow」→「Run workflow」** をクリック
-3. ✅ 緑のチェックが出れば成功！Discordにも通知が届きます
+3. Discordに通知が送信されたら成功
 
 ---
 
