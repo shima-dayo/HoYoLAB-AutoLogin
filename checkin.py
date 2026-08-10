@@ -17,8 +17,10 @@ HEADERS = {
     "Referer": "https://act.hoyolab.com/",
     "Origin":  "https://act.hoyolab.com",
     "Accept":  "application/json, text/plain, */*",
+    "Accept-Language": "ja-JP,ja;q=0.9",
     "Content-Type": "application/json;charset=UTF-8",
     "x-rpc-signgame": "hk4e",
+    "x-rpc-language": "ja-jp",
 }
 
 # ---------- Cookie ヘルパー ----------
@@ -31,16 +33,18 @@ def build_cookie() -> str:
     """
     direct = os.environ.get("HOYOLAB_COOKIE", "").strip()
     if direct:
+        # mi18nLang が含まれていなければ追記して言語を日本語に固定する
+        if "mi18nLang" not in direct:
+            direct = direct.rstrip("; ") + "; mi18nLang=ja-jp;"
         return direct
 
     ltuid  = os.environ.get("LTUID",  "").strip()
     ltoken = os.environ.get("LTOKEN", "").strip()
     if ltuid and ltoken:
-        return f"ltuid_v2={ltuid}; ltoken_v2={ltoken};"
+        return f"ltuid_v2={ltuid}; ltoken_v2={ltoken}; mi18nLang=ja-jp;"
 
     raise ValueError(
-        "エラー: 認証情報が見つかりません。\n"
-        "README.md のステップ3を確認し、Secret を登録してください。"
+        "エラー: 認証情報が見つかりません。"
     )
 
 # ---------- API ----------
@@ -56,7 +60,7 @@ def get_sign_info(cookie: str) -> dict:
     return resp.json()
 
 def get_today_reward(cookie: str, day_index: int) -> dict | None:
-    """今日もらえる報酬をホーム一覧から取得する"""
+    """今日は何がもらえるかな？"""
     try:
         resp = requests.get(
             HOME_URL,
@@ -90,13 +94,13 @@ def send_discord(webhook_url: str, success: bool, message: str, reward: dict | N
 
     if success:
         color = 0x57F287  # 緑
-        title = "✅ チェックイン成功"
+        title = "✅ チェックインに成功したよ！"
         desc  = message
         if reward:
             desc += f"\n\n **本日の報酬**: {reward['name']} × {reward['cnt']}"
     else:
         color = 0xED4245  # 赤
-        title = "❌ チェックイン失敗"
+        title = "❌ チェックインに失敗したよ。"
         desc  = message
 
     payload = {
@@ -114,9 +118,9 @@ def send_discord(webhook_url: str, success: bool, message: str, reward: dict | N
     try:
         r = requests.post(webhook_url, json=payload, timeout=10)
         r.raise_for_status()
-        print("[Discord] 通知を送信しました")
+        print("[Discord] 通知送信に成功")
     except Exception as e:
-        print(f"[Discord] 通知の送信に失敗しました: {e}")
+        print(f"[Discord] 通知送信に失敗: {e}")
 
 # ---------- メイン ----------
 
@@ -144,7 +148,7 @@ def main():
     message = result.get("message", "不明なエラー")
 
     if retcode in (0, -5003):
-        # 成功後にもう一度 info を取得して累計日数を表示
+        # 成功後にもう一回 info を取得して累計日数を表示
         info_res2  = get_sign_info(cookie)
         total_days = info_res2.get("data", {}).get("total_sign_day", total_days if 'total_days' in dir() else "?")
         reward     = get_today_reward(cookie, int(total_days) - 1) if str(total_days).isdigit() else None
@@ -153,7 +157,7 @@ def main():
         print(f"✅ {msg}")
         send_discord(webhook_url, True, msg, reward)
     else:
-        msg = f"チェックイン失敗 (コード: {retcode}): {message}\nCookieの期限切れの可能性があります。"
+        msg = f"チェックインに失敗したよ。 (コード: {retcode}): {message}\nCookieが期限切れの可能性があります。"
         print(f"❌ {msg}")
         send_discord(webhook_url, False, msg)
         raise SystemExit(1)
