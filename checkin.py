@@ -93,7 +93,7 @@ def send_discord(webhook_url: str, success: bool, message: str, reward: dict | N
         title = "✅ チェックイン成功"
         desc  = message
         if reward:
-            desc += f"\n\n🎁 **本日の報酬**: {reward['name']} × {reward['cnt']}"
+            desc += f"\n\n **本日の報酬**: {reward['name']} × {reward['cnt']}"
     else:
         color = 0xED4245  # 赤
         title = "❌ チェックイン失敗"
@@ -104,7 +104,7 @@ def send_discord(webhook_url: str, success: bool, message: str, reward: dict | N
             "title": title,
             "description": desc,
             "color": color,
-            "footer": {"text": "原神 HoYoLab 自動チェックイン"},
+            "footer": {"text": "HoYoLAB 自動チェックイン"},
         }]
     }
 
@@ -121,7 +121,7 @@ def send_discord(webhook_url: str, success: bool, message: str, reward: dict | N
 # ---------- メイン ----------
 
 def main():
-    print("=== HoYoLab 原神 チェックイン ===")
+    print("=== HoYoLAB 自動チェックイン ===")
 
     cookie      = build_cookie()
     webhook_url = os.environ.get("DISCORD_WEBHOOK_URL", "").strip()
@@ -133,7 +133,7 @@ def main():
         total_days = info.get("total_sign_day", 0)
 
         if info.get("is_sign"):
-            msg = f"本日はすでにチェックイン済みです。（今月の累計: {total_days}日）"
+            msg = f"今日はすでにチェックインしたよ！（今月の累計: {total_days}日）"
             print(f"✅ {msg}")
             send_discord(webhook_url, True, msg)
             return
@@ -149,11 +149,11 @@ def main():
         total_days = info_res2.get("data", {}).get("total_sign_day", total_days if 'total_days' in dir() else "?")
         reward     = get_today_reward(cookie, int(total_days) - 1) if str(total_days).isdigit() else None
 
-        msg = f"チェックイン成功！（今月の累計: {total_days}日）"
+        msg = f"チェックインに成功したよ！（今月の累計: {total_days}日）"
         print(f"✅ {msg}")
         send_discord(webhook_url, True, msg, reward)
     else:
-        msg = f"チェックイン失敗 (コード: {retcode}): {message}\nCookieの期限切れの可能性があります。README.md のステップ2〜3をやり直してください。"
+        msg = f"チェックイン失敗 (コード: {retcode}): {message}\nCookieの期限切れの可能性があります。"
         print(f"❌ {msg}")
         send_discord(webhook_url, False, msg)
         raise SystemExit(1)
