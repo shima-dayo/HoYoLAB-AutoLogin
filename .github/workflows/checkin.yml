@@ -23,12 +23,12 @@ jobs:
 
       - name: チェックインを実行
         env:
-          # --- 認証情報（どちらか一方を登録すればOK） ---
-          # 方法A: Cookie文字列をそのまま登録する場合
+          # 認証情報(どちらか一方を登録すればOK)
+          # 1: Cookie文字列をそのまま登録する場合
           HOYOLAB_COOKIE: ${{ secrets.HOYOLAB_COOKIE }}
-          # 方法B: LTUID と LTOKEN を別々に登録する場合
+          # 2: LTUID と LTOKEN を別々に登録する場合
           LTUID:  ${{ secrets.LTUID }}
           LTOKEN: ${{ secrets.LTOKEN }}
-          # --- Discord通知（任意） ---
+          # Discord通知(任意)
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: python checkin.py
