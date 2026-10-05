@@ -1,7 +1,7 @@
 import os
 import requests
 
-# ===== 設定 =====
+# 設定
 ACT_ID = "e202102251931481"
 SIGN_URL = "https://sg-hk4e-api.hoyolab.com/event/sol/sign"
 INFO_URL  = "https://sg-hk4e-api.hoyolab.com/event/sol/info"
@@ -23,7 +23,7 @@ HEADERS = {
     "x-rpc-language": "ja-jp",
 }
 
-# ---------- Cookie ヘルパー ----------
+# Cookie ヘルパー
 
 def build_cookie() -> str:
     direct = os.environ.get("HOYOLAB_COOKIE", "").strip()
@@ -42,7 +42,7 @@ def build_cookie() -> str:
         "README.md のステップ3を確認し、Secret を登録してください。"
     )
 
-# ---------- API ----------
+# API
 
 def get_sign_info(cookie: str) -> dict:
     resp = requests.get(
@@ -82,7 +82,7 @@ def sign(cookie: str) -> dict:
     resp.raise_for_status()
     return resp.json()
 
-# ---------- Discord ----------
+# Discord
 
 def send_discord(webhook_url: str, success: bool, message: str, reward: dict | None = None):
     if not webhook_url:
@@ -118,7 +118,7 @@ def send_discord(webhook_url: str, success: bool, message: str, reward: dict | N
     except Exception as e:
         print(f"[Discord] 通知送信に失敗: {e}")
 
-# ---------- メイン ----------
+# メイン
 
 def main():
     print("=== HoYoLAB 自動チェックイン ===")
